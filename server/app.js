@@ -1,10 +1,16 @@
-// import files and packages up here
+const path = require('node:path');
+const express = require('express');
+const morgan = require('morgan');
+const topSpots = require('./data.json');
 
+const app = express();
 
-// create your express server below
-var app;
+app.use(morgan('dev'));
 
-// add your routes and middleware below
+app.get('/data', (req, res) => {
+  res.json(topSpots);
+});
 
-// finally export the express application
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 module.exports = app;
